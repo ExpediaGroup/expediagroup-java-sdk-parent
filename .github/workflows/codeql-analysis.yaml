@@ -1,0 +1,43 @@
+---
+name: GHAS-CodeQL-Scan
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: '55 0 * * 1'
+  push:
+    branches:
+      - main
+jobs:
+  analyze:
+    name: Analyze
+    runs-on:
+      - eg-securityscan
+    strategy:
+      fail-fast: false
+      matrix:
+        language:
+          - java
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Java
+        if: matrix.language == 'java'
+        uses: actions/setup-java@v3
+        with:
+          overwrite-settings: false
+          # Unable to automatically detect Java version. Defaulted to Java 11.
+          # 📝️️ Please update java-version as appropriate.
+          java-version: '11'
+          distribution: adopt
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: ${{ matrix.language }}
+          queries: security-extended
+      - name: Custom Build
+        run: mvn --batch-mode --update-snapshots verify
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
