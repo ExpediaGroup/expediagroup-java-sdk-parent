@@ -5,10 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <name>EG Open World SDK Tooling :: BOM</name>
-
-    <groupId>com.expediagroup.openworld.sdk</groupId>
+    <parent>
+        <artifactId>openworld-java-sdk-pom</artifactId>
+        <groupId>com.expediagroup.openworld.sdk</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
     <artifactId>openworld-java-sdk-bom</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <dependencyManagement>
