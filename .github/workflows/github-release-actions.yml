@@ -1,6 +1,8 @@
 name: BULL Release
 on:
   push:
+    branches:
+      - master
 jobs:
   job:
     runs-on: ubuntu-latest
