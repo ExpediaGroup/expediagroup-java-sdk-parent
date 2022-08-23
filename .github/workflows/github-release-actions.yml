@@ -1,8 +1,6 @@
 name: BULL Release
 on:
   push:
-    branches:
-      - master
 jobs:
   job:
     runs-on: ubuntu-latest
@@ -26,4 +24,6 @@ jobs:
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PRIVATE_KEY_PASSPHRASE }}
         run: |
+          mvn deploy --settings $GITHUB_WORKSPACE/settings.xml -B -U -P release -DskipTests=true
+          cd bom
           mvn deploy --settings $GITHUB_WORKSPACE/settings.xml -B -U -P release -DskipTests=true
