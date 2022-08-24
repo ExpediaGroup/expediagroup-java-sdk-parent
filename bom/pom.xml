@@ -8,7 +8,7 @@
     <parent>
         <artifactId>openworld-java-sdk-pom</artifactId>
         <groupId>com.expediagroup.openworld.sdk</groupId>
-        <version>0.0.1-alpha.1</version>
+        <version>0.0.1-alpha.2</version>
     </parent>
     <artifactId>openworld-java-sdk-bom</artifactId>
     <packaging>pom</packaging>
@@ -20,14 +20,14 @@
             <dependency>
                 <groupId>com.expediagroup.openworld.sdk</groupId>
                 <artifactId>openworld-java-sdk-core</artifactId>
-                <version>0.0.1-alpha</version>
+                <version>0.0.1-alpha.2</version>
             </dependency>
 
             <!-- TODO: Dynamically add dependencies for each generated SDK -->
             <dependency>
                 <groupId>com.expediagroup.openworld.sdk</groupId>
                 <artifactId>openworld-java-sdk-exemplar</artifactId>
-                <version>0.0.1-alpha</version>
+                <version>0.0.1-alpha.2</version>
             </dependency>
 
         </dependencies>

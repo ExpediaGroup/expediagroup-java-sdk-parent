@@ -1,6 +1,6 @@
 name: Openworld SDK Release
 on:
-  push:
+  workflow_dispatch:
 jobs:
   job:
     runs-on: ubuntu-latest
