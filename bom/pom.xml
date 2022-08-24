@@ -8,7 +8,7 @@
     <parent>
         <artifactId>openworld-java-sdk-pom</artifactId>
         <groupId>com.expediagroup.openworld.sdk</groupId>
-        <version>0.0.1-alpha</version>
+        <version>0.0.1-alpha.1</version>
     </parent>
     <artifactId>openworld-java-sdk-bom</artifactId>
     <packaging>pom</packaging>
