@@ -1,7 +1,6 @@
 name: Openworld SDK Release
 on:
-  workflow_dispatch:
-    inputs:
+  workflow_dispatch
 
 jobs:
   job:
