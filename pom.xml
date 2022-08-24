@@ -1,21 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-
-    Copyright (C) 2022 Expedia, Inc.
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-
--->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -25,9 +8,10 @@
     <artifactId>openworld-java-sdk-pom</artifactId>
     <version>0.0.1-alpha</version>
     <packaging>pom</packaging>
-
-    <name>EG Open World SDK Tooling</name>
-    <description>Tooling for building the EG Travel SDK</description>
+    <name>EG Open World SDK For Java</name>
+    <description>Parent POM For G Open World SDK For Java</description>
+    <inceptionYear>2022</inceptionYear>
+    <url>https://github.com/ExpediaGroup/openworld-sdk-java</url>
 
     <distributionManagement>
         <snapshotRepository>
@@ -97,6 +81,23 @@
         <slf4j.version>1.7.36</slf4j.version>
         <log4j.version>2.18.0</log4j.version>
     </properties>
+
+    <!-- distribution configuration -->
+    <scm>
+        <connection>scm:git:git@github.com:ExpediaGroup/openworld-sdk-java.git</connection>
+        <developerConnection>scm:git:git@github.com:ExpediaGroup/openworld-sdk-java.git</developerConnection>
+        <url>https://github.com/ExpediaGroup/openworld-sdk-java</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
 
     <dependencyManagement>
         <dependencies>
@@ -699,33 +700,6 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>com.mycila</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-                <configuration>
-                    <properties>
-                        <year>2022</year>
-                        <owner>Expedia, Inc.</owner>
-                    </properties>
-                    <licenseSets>
-                        <licenseSet>
-                            <header>LICENSE-HEADER.txt</header>
-                            <includes>
-                                <include>**/pom.xml</include>
-                            </includes>
-                        </licenseSet>
-                    </licenseSets>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>format</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
