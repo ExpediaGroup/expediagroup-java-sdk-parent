@@ -98,6 +98,13 @@
             <comments>A business-friendly OSS license</comments>
         </license>
     </licenses>
+    <developers>
+        <developer>
+            <name>Expedia Group Committers</name>
+            <organization>Expedia Group</organization>
+            <organizationUrl>https://expediagroup.com</organizationUrl>
+        </developer>
+    </developers>
 
     <dependencyManagement>
         <dependencies>
