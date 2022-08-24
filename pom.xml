@@ -62,7 +62,7 @@
         <jacoco-plugin.version>0.8.8</jacoco-plugin.version>
         <dokka-plugin.version>1.7.10</dokka-plugin.version>
         <maven.gpg.plugin.version>3.0.1</maven.gpg.plugin.version>
-        <maven.release.plugin.version>3.0.0-M4</maven.release.plugin.version>
+        <maven.release.plugin.version>3.4.1</maven.release.plugin.version>
         <maven.nexus-staging.plugin.version>1.6.13</maven.nexus-staging.plugin.version>
         <!-- Kotlin Compatible Versions -->
         <kotlin.version>1.7.10</kotlin.version>
@@ -502,7 +502,11 @@
                         </dokkaPlugins>
                     </configuration>
                 </plugin>
-
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven.javadoc-plugin.version}</version>
+                </plugin>
                 <!-- Configure Javadocs to be JDK11+ Compatible -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
