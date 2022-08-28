@@ -5,6 +5,7 @@ on:
       confirmation:
         description: 'confirmation to release on maven central'
         required: true
+  push:
 jobs:
   job:
     runs-on: ubuntu-latest

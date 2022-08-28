@@ -64,6 +64,7 @@
         <maven.gpg.plugin.version>3.0.1</maven.gpg.plugin.version>
         <maven.release.plugin.version>3.4.1</maven.release.plugin.version>
         <maven.nexus-staging.plugin.version>1.6.13</maven.nexus-staging.plugin.version>
+        <maven.licence.plugin.version>4.1</maven.licence.plugin.version>
         <!-- Kotlin Compatible Versions -->
         <kotlin.version>1.7.10</kotlin.version>
         <kotlinx.coroutines.version>1.6.4</kotlinx.coroutines.version>
@@ -497,6 +498,13 @@
                             </plugin>
                         </dokkaPlugins>
                     </configuration>
+                </plugin>
+
+                <!-- Add Licence Header-->
+                <plugin>
+                    <groupId>com.mycila</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>${maven.licence.plugin.version}</version>
                 </plugin>
                 <!-- Configure Javadocs to be JDK11+ Compatible -->
                 <plugin>
