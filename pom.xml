@@ -6,11 +6,12 @@
 
     <groupId>com.expediagroup.openworld.sdk</groupId>
     <artifactId>openworld-java-sdk-pom</artifactId>
-    <version>0.0.1-alpha</version>
+    <version>0.0.1-alpha.3</version>
     <packaging>pom</packaging>
-
-    <name>EG Open World SDK Tooling</name>
-    <description>Tooling for building the EG Travel SDK</description>
+    <name>EG Open World SDK For Java</name>
+    <description>Parent POM For EG Open World SDK For Java</description>
+    <inceptionYear>2022</inceptionYear>
+    <url>https://github.com/ExpediaGroup/openworld-sdk-java</url>
 
     <distributionManagement>
         <snapshotRepository>
@@ -60,7 +61,10 @@
         <ktlint-plugin.version>1.13.1</ktlint-plugin.version>
         <jacoco-plugin.version>0.8.8</jacoco-plugin.version>
         <dokka-plugin.version>1.7.10</dokka-plugin.version>
-
+        <maven.gpg.plugin.version>3.0.1</maven.gpg.plugin.version>
+        <maven.release.plugin.version>3.4.1</maven.release.plugin.version>
+        <maven.nexus-staging.plugin.version>1.6.13</maven.nexus-staging.plugin.version>
+        <maven.licence.plugin.version>4.1</maven.licence.plugin.version>
         <!-- Kotlin Compatible Versions -->
         <kotlin.version>1.7.10</kotlin.version>
         <kotlinx.coroutines.version>1.6.4</kotlinx.coroutines.version>
@@ -78,6 +82,30 @@
         <slf4j.version>1.7.36</slf4j.version>
         <log4j.version>2.18.0</log4j.version>
     </properties>
+
+    <!-- distribution configuration -->
+    <scm>
+        <connection>scm:git:git@github.com:ExpediaGroup/openworld-sdk-java.git</connection>
+        <developerConnection>scm:git:git@github.com:ExpediaGroup/openworld-sdk-java.git</developerConnection>
+        <url>https://github.com/ExpediaGroup/openworld-sdk-java</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Expedia Group Committers</name>
+            <organization>Expedia Group</organization>
+            <organizationUrl>https://expediagroup.com</organizationUrl>
+        </developer>
+    </developers>
 
     <dependencyManagement>
         <dependencies>
@@ -449,9 +477,10 @@
                     <version>${dokka-plugin.version}</version>
                     <executions>
                         <execution>
-                            <phase>pre-site</phase>
+                            <phase>prepare-package</phase>
                             <goals>
                                 <goal>dokka</goal>
+                                <goal>javadocJar</goal>
                             </goals>
                         </execution>
                     </executions>
@@ -467,15 +496,16 @@
                                 <artifactId>kotlin-as-java-plugin</artifactId>
                                 <version>${dokka-plugin.version}</version>
                             </plugin>
-                            <plugin>
-                                <groupId>org.jetbrains.dokka</groupId>
-                                <artifactId>gfm-plugin</artifactId>
-                                <version>${dokka-plugin.version}</version>
-                            </plugin>
                         </dokkaPlugins>
                     </configuration>
                 </plugin>
 
+                <!-- Add Licence Header-->
+                <plugin>
+                    <groupId>com.mycila</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>${maven.licence.plugin.version}</version>
+                </plugin>
                 <!-- Configure Javadocs to be JDK11+ Compatible -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -681,12 +711,6 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
             </plugin>
-
-            <plugin>
-                <groupId>com.mycila</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-                <version>4.1</version>
-            </plugin>
         </plugins>
     </build>
 
@@ -800,16 +824,80 @@
                         <groupId>org.jetbrains.kotlin</groupId>
                         <artifactId>kotlin-maven-plugin</artifactId>
                     </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <!-- release profile -->
+        <profile>
+            <id>release</id>
+            <properties>
+                <checkstyle.check.skip>true</checkstyle.check.skip>
+                <checkstyle.includeTestSourceDirectory>false</checkstyle.includeTestSourceDirectory>
+                <test.coverage.check.skip>true</test.coverage.check.skip>
+                <javadoc.skip>true</javadoc.skip>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${maven.gpg.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.13</version>
+                        <version>${maven.nexus-staging.plugin.version}</version>
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>oss-sonatype</serverId>
                             <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                             <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
+                    </plugin>
+                    <!-- skip some test cases during the release -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/PerformanceTest.java</exclude>
+                                <argLine>@{argLine}</argLine>
+                            </excludes>
+                        </configuration>
+                    </plugin>
+                    <!-- replace the bean-utils-library javadoc jar file with the one containing all modules -->
+                    <plugin>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <configuration>
+                                    <classifier>javadoc</classifier>
+                                    <classesDirectory>${project.parent.basedir}/target/site/apidocs</classesDirectory>
+                                    <includes>**/*</includes>
+                                    <finalName>${project.build.finalName}</finalName>
+                                </configuration>
+                                <id>pack-javadoc</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
