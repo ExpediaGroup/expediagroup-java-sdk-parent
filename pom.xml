@@ -6,7 +6,7 @@
 
     <groupId>com.expediagroup.openworld.sdk</groupId>
     <artifactId>openworld-java-sdk-pom</artifactId>
-    <version>0.0.1-alpha.3</version>
+    <version>0.0.1-alpha.4</version>
     <packaging>pom</packaging>
     <name>EG Open World SDK For Java</name>
     <description>Parent POM For EG Open World SDK For Java</description>
@@ -505,6 +505,14 @@
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
                     <version>${maven.licence.plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>format</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <!-- Configure Javadocs to be JDK11+ Compatible -->
                 <plugin>
