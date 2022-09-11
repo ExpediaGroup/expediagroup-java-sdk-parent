@@ -1,4 +1,4 @@
-name: Open World SDK Release
+name: Open World Parent POM Release
 on:
   workflow_dispatch:
     inputs:
