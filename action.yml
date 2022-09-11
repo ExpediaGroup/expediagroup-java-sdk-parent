@@ -1,0 +1,15 @@
+name: 'Custom File Builder'
+description: 'Custom file builder'
+inputs:
+  sdk-version: # id of input
+    description: 'the version of the sdk'
+    required: true
+  sdk-name: # id of input
+    description: 'the name of the sdk'
+    required: true
+  bom-version: # id of input
+    description: 'the version of the bom'
+    required: true
+runs:
+  using: 'node16'
+  main: 'index.js'
