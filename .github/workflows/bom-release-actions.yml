@@ -1,5 +1,6 @@
 name: Open World BOM Release
 on:
+  workflow_call:
   workflow_dispatch:
     inputs:
       confirmation:
