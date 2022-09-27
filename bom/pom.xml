@@ -9,7 +9,7 @@
     </parent>
     <artifactId>openworld-java-sdk-bom</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1-alpha.10</version>
+    <version>0.0.1-alpha.11</version>
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -25,7 +25,7 @@
             <dependency>
                 <groupId>com.expediagroup.openworld.sdk</groupId>
                 <artifactId>openworld-java-sdk-fraudprevention</artifactId>
-                <version>0.0.1-alpha.7</version>
+                <version>0.0.1-alpha.8</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
