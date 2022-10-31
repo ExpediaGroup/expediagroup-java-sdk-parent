@@ -73,7 +73,7 @@
         <kotlinx.serialization.version>1.3.3</kotlinx.serialization.version>
         <ktor.version>2.0.3</ktor.version>
         <kotlin-logging.version>2.1.23</kotlin-logging.version>
-        <kotlin-atomic.version>0.18.3</kotlin-atomic.version>
+        <kotlin-atomic.version>0.18.5</kotlin-atomic.version>
         <ktlint.version>0.47.1</ktlint.version>
         <detekt.version>1.21.0</detekt.version>
 
