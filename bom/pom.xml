@@ -5,17 +5,17 @@
     <parent>
         <artifactId>openworld-java-sdk-pom</artifactId>
         <groupId>com.expediagroup.openworld.sdk</groupId>
-        <version>0.0.1-alpha.5</version>
+        <version>0.0.2-alpha.1</version>
     </parent>
     <artifactId>openworld-java-sdk-bom</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1-alpha.11</version>
+    <version>0.0.2-alpha.1</version>
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.expediagroup.openworld.sdk</groupId>
                 <artifactId>openworld-java-sdk-core</artifactId>
-                <version>0.0.2-alpha</version>
+                <version>0.0.2-alpha.3</version>
             </dependency>
             <dependency>
                 <groupId>com.expediagroup.openworld.sdk</groupId>
