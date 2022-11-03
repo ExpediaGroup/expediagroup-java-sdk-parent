@@ -85,6 +85,8 @@
         <mockito.version>4.8.1</mockito.version>
         <slf4j.version>2.0.3</slf4j.version>
         <log4j.version>2.19.0</log4j.version>
+
+        <swagger.core.version>2.2.6</swagger.core.version>
     </properties>
 
     <!-- distribution configuration -->
@@ -234,12 +236,12 @@
             <dependency>
                 <groupId>io.swagger.core.v3</groupId>
                 <artifactId>swagger-models</artifactId>
-                <version>2.2.5</version>
+                <version>${swagger.core.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.swagger.core.v3</groupId>
                 <artifactId>swagger-core</artifactId>
-                <version>2.2.5</version>
+                <version>${swagger.core.version}</version>
             </dependency>
             <dependency>
                 <groupId>joda-time</groupId>
