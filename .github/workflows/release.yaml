@@ -18,7 +18,7 @@ on:
         options:
           - 'No'
           - 'Yes'
-        default: 'No'
+        default: 'Yes'
 
 jobs:
   upgrade_version:
