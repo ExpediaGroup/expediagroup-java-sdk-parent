@@ -1,17 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.expediagroup.openworld.sdk</groupId>
-    <artifactId>openworld-java-sdk-pom</artifactId>
-    <version>0.3.0</version>
-    <packaging>pom</packaging>
-    <name>EG Open World SDK For Java</name>
-    <description>Parent POM For EG Open World SDK For Java</description>
+    <groupId>com.expediagroup</groupId>
+    <artifactId>sdk-parent-pom</artifactId>
+    <name>EG SDK :: Parent POM</name>
+    <description>Parent POM Module of Expedia Group SDK</description>
+    <version>1</version>
     <inceptionYear>2022</inceptionYear>
-    <url>https://github.com/ExpediaGroup/openworld-sdk-java</url>
+    <url>https://github.com/ExpediaGroup/expediagroup-java-sdk-parent</url>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+    <packaging>pom</packaging>
+
+    <developers>
+        <developer>
+            <name>Expedia Group Committers</name>
+            <organization>Expedia Group</organization>
+            <organizationUrl>https://expediagroup.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git@github.com:ExpediaGroup/expediagroup-java-sdk-parent.git</connection>
+        <developerConnection>scm:git:git@github.com:ExpediaGroup/expediagroup-java-sdk-parent.git</developerConnection>
+        <url>https://github.com/ExpediaGroup/expediagroup-java-sdk-parent</url>
+        <tag>HEAD</tag>
+    </scm>
 
     <distributionManagement>
         <snapshotRepository>
@@ -25,6 +49,7 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
+
 
     <properties>
         <!-- Target JDK8 Minimum -->
@@ -42,76 +67,49 @@
         <!-- Require Code Coverage -->
         <minimum.code.coverage>0.90</minimum.code.coverage>
 
-        <!-- Default shade relocation package -->
-        <!-- This is expected to be overwritten by individual SDKs -->
-        <shadePrefix>com.expediagroup.openworld.sdk</shadePrefix>
-
         <!-- Plugin Versions -->
-        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
-        <maven-dependency-plugin.version>3.4.0</maven-dependency-plugin.version>
-        <maven-enforcer-plugin.version>3.1.0</maven-enforcer-plugin.version>
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+        <maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
+        <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
         <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
-        <maven-javadoc-plugin.version>3.4.1</maven-javadoc-plugin.version>
-        <maven-resources-plugin.version>3.3.0</maven-resources-plugin.version>
-        <maven-shade-plugin.version>3.4.1</maven-shade-plugin.version>
-        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
-        <build-helper-maven-plugin.version>3.3.0</build-helper-maven-plugin.version>
-        <exec-maven-plugin.version>3.1.0</exec-maven-plugin.version>
-        <ktlint-plugin.version>1.15.2</ktlint-plugin.version>
-        <jacoco-plugin.version>0.8.8</jacoco-plugin.version>
-        <dokka-plugin.version>1.7.20</dokka-plugin.version>
-        <maven.gpg.plugin.version>3.0.1</maven.gpg.plugin.version>
+        <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
+        <maven-shade-plugin.version>3.5.1</maven-shade-plugin.version>
+        <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
+        <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+        <build-helper-maven-plugin.version>3.4.0</build-helper-maven-plugin.version>
+        <exec-maven-plugin.version>3.2.0</exec-maven-plugin.version>
+        <ktlint-plugin.version>3.2.0</ktlint-plugin.version>
+        <jacoco-plugin.version>0.8.11</jacoco-plugin.version>
+        <dokka-plugin.version>1.9.20</dokka-plugin.version>
+        <maven.gpg.plugin.version>3.1.0</maven.gpg.plugin.version>
         <maven.release.plugin.version>3.4.1</maven.release.plugin.version>
         <maven.nexus-staging.plugin.version>1.6.13</maven.nexus-staging.plugin.version>
-        <maven.licence.plugin.version>4.1</maven.licence.plugin.version>
+        <maven.licence.plugin.version>4.3</maven.licence.plugin.version>
         <maven.antrun.plugin.version>3.1.0</maven.antrun.plugin.version>
+        <flatten.maven.plugin.version>1.5.0</flatten.maven.plugin.version>
+        <properties.maven.plugin.version>1.0.0</properties.maven.plugin.version>
 
         <!-- Kotlin Compatible Versions -->
-        <kotlin.version>1.7.22</kotlin.version>
-        <kotlinx.coroutines.version>1.6.4</kotlinx.coroutines.version>
-        <kotlinx.serialization.version>1.4.1</kotlinx.serialization.version>
-        <ktor.version>2.2.1</ktor.version>
-        <kotlin-logging.version>3.0.4</kotlin-logging.version>
-        <kotlin-atomic.version>0.18.5</kotlin-atomic.version>
-        <ktlint.version>0.47.1</ktlint.version>
-        <detekt.version>1.21.0</detekt.version>
+        <kotlin.version>1.9.23</kotlin.version>
+        <kotlinx.coroutines.version>1.8.0</kotlinx.coroutines.version>
+        <kotlinx.serialization.version>1.6.3</kotlinx.serialization.version>
+        <ktor.version>2.3.9</ktor.version>
+        <kotlin-logging.version>3.0.5</kotlin-logging.version>
+        <kotlin-atomic.version>0.23.2</kotlin-atomic.version>
+        <ktlint.version>1.1.1</ktlint.version>
+        <detekt.version>1.23.1</detekt.version>
 
         <!-- Shared Library Versions -->
-        <airline.version>2.9.0</airline.version>
-        <assertj.version>3.23.1</assertj.version>
-        <junit5.version>5.9.1</junit5.version>
-        <mockk.version>1.13.3</mockk.version>
-        <mockito.version>4.10.0</mockito.version>
-        <slf4j.version>2.0.6</slf4j.version>
-        <log4j.version>2.19.0</log4j.version>
+        <airline.version>3.0.0</airline.version>
+        <assertj.version>3.25.3</assertj.version>
+        <junit5.version>5.10.2</junit5.version>
+        <mockk.version>1.13.10</mockk.version>
+        <mockito.version>5.11.0</mockito.version>
+        <slf4j.version>2.0.12</slf4j.version>
+        <log4j.version>2.23.1</log4j.version>
 
         <swagger.core.version>2.2.21</swagger.core.version>
     </properties>
-
-    <!-- distribution configuration -->
-    <scm>
-        <connection>scm:git:git@github.com:ExpediaGroup/openworld-sdk-java.git</connection>
-        <developerConnection>scm:git:git@github.com:ExpediaGroup/openworld-sdk-java.git</developerConnection>
-        <url>https://github.com/ExpediaGroup/openworld-sdk-java</url>
-        <tag>HEAD</tag>
-    </scm>
-
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-            <comments>A business-friendly OSS license</comments>
-        </license>
-    </licenses>
-    <developers>
-        <developer>
-            <name>Expedia Group Committers</name>
-            <organization>Expedia Group</organization>
-            <organizationUrl>https://expediagroup.com</organizationUrl>
-        </developer>
-    </developers>
 
     <dependencyManagement>
         <dependencies>
@@ -122,6 +120,11 @@
                 <version>${kotlin.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-reflect</artifactId>
+                <version>${kotlin.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.jetbrains.kotlinx</groupId>
@@ -217,7 +220,7 @@
             <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
-                <version>2.10</version>
+                <version>2.10.1</version>
             </dependency>
 
             <!--!!!! DEPENDENCY UPPER BOUND CONVERGENCE !!!!-->
@@ -231,7 +234,7 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>31.1-jre</version>
+                <version>33.1.0-jre</version>
             </dependency>
             <dependency>
                 <groupId>io.swagger.core.v3</groupId>
@@ -246,34 +249,54 @@
             <dependency>
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
-                <version>2.12.2</version>
+                <version>2.12.7</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson</groupId>
                 <artifactId>jackson-bom</artifactId>
-                <version>2.14.1</version>
+                <version>2.17.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.12.0</version>
+                <version>3.14.0</version>
             </dependency>
             <dependency>
                 <groupId>org.checkerframework</groupId>
                 <artifactId>checker-qual</artifactId>
-                <version>3.28.0</version>
+                <version>3.42.0</version>
             </dependency>
             <dependency>
                 <groupId>com.google.errorprone</groupId>
                 <artifactId>error_prone_annotations</artifactId>
-                <version>2.16</version>
+                <version>2.26.1</version>
             </dependency>
             <dependency>
-                <groupId>org.yaml</groupId>
-                <artifactId>snakeyaml</artifactId>
-                <version>1.33</version>
+                <groupId>com.squareup.okio</groupId>
+                <artifactId>okio-jvm</artifactId>
+                <version>3.9.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains</groupId>
+                <artifactId>annotations</artifactId>
+                <version>24.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>2.0.1.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>2.17.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate.validator</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>6.2.5.Final</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -315,52 +338,6 @@
                     </executions>
                 </plugin>
 
-                <!-- Configure Java+Kotlin Dual Support -->
-                <plugin>
-                    <artifactId>kotlin-maven-plugin</artifactId>
-                    <groupId>org.jetbrains.kotlin</groupId>
-                    <version>${kotlin.version}</version>
-                    <executions>
-                        <execution>
-                            <id>compile-kotlin</id>
-                            <goals>
-                                <goal>compile</goal>
-                            </goals>
-                            <configuration>
-                                <sourceDirs>
-                                    <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
-                                    <sourceDir>${project.basedir}/src/main/java</sourceDir>
-                                </sourceDirs>
-                                <jvmTarget>${java.release}</jvmTarget>
-                            </configuration>
-                        </execution>
-                        <execution>
-                            <id>test-compile-kotlin</id>
-                            <goals>
-                                <goal>test-compile</goal>
-                            </goals>
-                            <configuration>
-                                <sourceDirs>
-                                    <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
-                                    <sourceDir>${project.basedir}/src/test/java</sourceDir>
-                                </sourceDirs>
-                                <jvmTarget>${java.release}</jvmTarget>
-                            </configuration>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <compilerPlugins>
-                            <plugin>kotlinx-serialization</plugin>
-                        </compilerPlugins>
-                    </configuration>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.jetbrains.kotlin</groupId>
-                            <artifactId>kotlin-maven-serialization</artifactId>
-                            <version>${kotlin.version}</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -409,6 +386,7 @@
                         </systemPropertyVariables>
                     </configuration>
                 </plugin>
+
                 <!-- Configure Code Coverage -->
                 <plugin>
                     <groupId>org.jacoco</groupId>
@@ -417,6 +395,35 @@
                     <configuration>
                         <dataFile>${project.build.directory}/jacoco.exec</dataFile>
                         <outputDirectory>${project.build.directory}/jacoco</outputDirectory>
+                        <excludes>
+                            <exclude>**/constant/**</exclude>
+
+                            <exclude>**/client/*Client*</exclude>
+
+                            <exclude>**/client/*EventListener*</exclude>
+
+                            <exclude>**/configuration/**ClientBuilder*</exclude>
+                            <exclude>**/configuration/NetworkConfiguration*</exclude>
+                            <exclude>**/config/**</exclude>
+
+                            <exclude>**/model/**</exclude>
+
+                            <exclude>**/plugin/Hook*</exclude>
+                            <exclude>**/plugin/Plugin*</exclude>
+                            <exclude>**/plugin/PluginConfiguration*</exclude>
+                            <exclude>**/plugin/KtorPluginConfiguration*</exclude>
+
+                            <exclude>**/authentication/AuthenticationConfiguration*</exclude>
+                            <exclude>**/authentication/AuthenticationPlugin*</exclude>
+
+                            <exclude>**/exception/ExceptionHandlingPlugin*</exclude>
+
+                            <exclude>**/logging/**</exclude>
+                            <exclude>**/serialization/**</exclude>
+
+                            <!-- This is well tested, but JaCoCo doesn't seem to be able to detect it -->
+                            <exclude>**/RapidHelpers*</exclude>
+                        </excludes>
                     </configuration>
                     <executions>
                         <execution>
@@ -472,6 +479,7 @@
                     <version>${ktlint-plugin.version}</version>
                     <executions>
                         <execution>
+                            <phase>compile</phase>
                             <id>check</id>
                             <goals>
                                 <goal>check</goal>
@@ -485,63 +493,36 @@
                     <groupId>org.jetbrains.dokka</groupId>
                     <artifactId>dokka-maven-plugin</artifactId>
                     <version>${dokka-plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <phase>prepare-package</phase>
-                            <goals>
-                                <goal>dokka</goal>
-                                <goal>javadocJar</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <sourceDirectories>
-                            <dir>${project.basedir}/src/main/kotlin</dir>
-                            <dir>${project.basedir}/src/main/java</dir>
-                        </sourceDirectories>
-
-                        <dokkaPlugins>
-                            <plugin>
-                                <groupId>org.jetbrains.dokka</groupId>
-                                <artifactId>kotlin-as-java-plugin</artifactId>
-                                <version>${dokka-plugin.version}</version>
-                            </plugin>
-                        </dokkaPlugins>
-                    </configuration>
                 </plugin>
 
-                <!-- Add Licence Header-->
+                <!-- Add Licence Header -->
                 <plugin>
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
                     <version>${maven.licence.plugin.version}</version>
+                    <configuration>
+                        <properties>
+                            <year>2024</year>
+                            <owner>Expedia, Inc.</owner>
+                        </properties>
+                        <licenseSets>
+                            <licenseSet>
+                                <header>LICENSE-HEADER.txt</header>
+                                <includes>
+                                    <include>**/*.kt</include>
+                                </includes>
+                            </licenseSet>
+                        </licenseSets>
+                    </configuration>
                     <executions>
                         <execution>
-                            <phase>install</phase>
+                            <id>add-license-header</id>
+                            <phase>validate</phase>
                             <goals>
                                 <goal>format</goal>
                             </goals>
                         </execution>
                     </executions>
-                </plugin>
-                <!-- Configure Javadocs to be JDK11+ Compatible -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>${maven-javadoc-plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <id>attach-javadocs</id>
-                            <goals>
-                                <goal>jar</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <additionalOptions combine.children="append">
-                            <additionalOption>-html5</additionalOption>
-                        </additionalOptions>
-                    </configuration>
                 </plugin>
 
                 <!-- Ensure that our dependencies are compatible -->
@@ -570,30 +551,6 @@
                     </executions>
                 </plugin>
 
-                <!-- Ensure Sources are attached -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <version>${maven-source-plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <id>attach-sources</id>
-                            <phase>none</phase>
-                        </execution>
-                        <execution>
-                            <id>attach-sources-override</id>
-                            <goals>
-                                <goal>jar-no-fork</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>attach-test-sources</id>
-                            <goals>
-                                <goal>test-jar-no-fork</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
@@ -617,93 +574,11 @@
                     </configuration>
                 </plugin>
 
-                <!-- Shading Configuration for Individual SDKs -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-shade-plugin</artifactId>
-                    <version>${maven-shade-plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <id>shade-sdk</id>
-                            <!-- Off by default, but still defined in the parent -->
-                            <phase>none</phase>
-                            <goals>
-                                <goal>shade</goal>
-                            </goals>
-                            <configuration>
-                                <useDependencyReducedPomInJar>true</useDependencyReducedPomInJar>
-                                <promoteTransitiveDependencies>true</promoteTransitiveDependencies>
-                                <transformers>
-                                    <transformer
-                                            implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-                                </transformers>
-                                <!-- List of exposed dependencies on each SDK -->
-                                <artifactSet>
-                                    <excludes>
-                                        <exclude>com.expediagroup.openworld.sdk:travel-sdk-config</exclude>
-                                        <exclude>org.jetbrains.kotlin:*</exclude>
-                                        <exclude>org.jetbrains.kotlinx:*</exclude>
-                                        <exclude>org.slf4j:slf4j-api</exclude>
-                                    </excludes>
-                                </artifactSet>
-                                <filters>
-                                    <filter>
-                                        <artifact>io*</artifact>
-                                        <excludes>
-                                            <exclude>META-INF/MANIFEST.MF</exclude>
-                                            <exclude>META-INF/*.DS</exclude>
-                                            <exclude>META-INF/versions/9/module-info.class</exclude>
-                                        </excludes>
-                                    </filter>
-                                    <filter>
-                                        <artifact>org*</artifact>
-                                        <excludes>
-                                            <exclude>META-INF/MANIFEST.MF</exclude>
-                                            <exclude>META-INF/*.DS</exclude>
-                                            <exclude>META-INF/versions/9/module-info.class</exclude>
-                                        </excludes>
-                                    </filter>
-                                </filters>
-                                <!-- Everything else gets relocated -->
-                                <relocations>
-                                    <relocation>
-                                        <pattern>org</pattern>
-                                        <shadedPattern>${shadePrefix}.org</shadedPattern>
-                                        <!-- Don't relocate shared component APIs -->
-                                        <excludes>
-                                            <exclude>org.slf4j.*</exclude>
-                                        </excludes>
-                                    </relocation>
-                                    <relocation>
-                                        <pattern>io</pattern>
-                                        <shadedPattern>${shadePrefix}.io</shadedPattern>
-                                    </relocation>
-                                    <relocation>
-                                        <pattern>okio</pattern>
-                                        <shadedPattern>${shadePrefix}.okio</shadedPattern>
-                                    </relocation>
-                                    <relocation>
-                                        <pattern>okhttp</pattern>
-                                        <shadedPattern>${shadePrefix}.okhttp</shadedPattern>
-                                    </relocation>
-                                </relocations>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
                     <version>${exec-maven-plugin.version}</version>
                 </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>${maven-resources-plugin.version}</version>
-                </plugin>
-
             </plugins>
         </pluginManagement>
 
@@ -718,210 +593,131 @@
                 <artifactId>maven-enforcer-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
 
-    <!-- Kotlin Integration -->
-    <profiles>
-        <profile>
-            <id>activate-kotlin</id>
-            <activation>
-                <file>
-                    <exists>${basedir}/src/main/kotlin</exists>
-                </file>
-            </activation>
+    <dependencies>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-serialization-jackson-jvm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-client-core-jvm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-client-okhttp-jvm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-client-auth-jvm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-client-content-negotiation-jvm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-http-jvm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-utils-jvm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-client-logging-jvm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-core-jvm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-serialization-jvm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-client-encoding-jvm</artifactId>
+        </dependency>
 
-            <!-- Add Kotlin Standard Library -->
-            <dependencies>
-                <dependency>
-                    <groupId>org.jetbrains.kotlin</groupId>
-                    <artifactId>kotlin-stdlib</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>org.jetbrains.kotlin</groupId>
-                    <artifactId>kotlin-stdlib-jdk8</artifactId>
-                </dependency>
-            </dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>atomicfu-jvm</artifactId>
+        </dependency>
 
-            <build>
-                <plugins>
-                    <!-- Add additional source directories -->
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>build-helper-maven-plugin</artifactId>
-                        <version>${build-helper-maven-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <id>add-kotlin-sources</id>
-                                <phase>generate-sources</phase>
-                                <goals>
-                                    <goal>add-source</goal>
-                                </goals>
-                                <configuration>
-                                    <sources>
-                                        <source>${project.basedir}/src/main/kotlin</source>
-                                    </sources>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>add-kotlin-test-sources</id>
-                                <phase>generate-sources</phase>
-                                <goals>
-                                    <goal>add-test-source</goal>
-                                </goals>
-                                <configuration>
-                                    <sources>
-                                        <source>${project.basedir}/src/test/kotlin</source>
-                                    </sources>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
+        <!-- Test Dependencies -->
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-client-mock-jvm</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-                    <!-- Lint the sources -->
-                    <plugin>
-                        <groupId>com.github.gantsign.maven</groupId>
-                        <artifactId>ktlint-maven-plugin</artifactId>
-                    </plugin>
-
-                    <!-- Document the sources -->
-                    <plugin>
-                        <groupId>org.jetbrains.dokka</groupId>
-                        <artifactId>dokka-maven-plugin</artifactId>
-                    </plugin>
-
-                    <!-- Disable Javadocs -->
-                    <plugin>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <phase>none</phase>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <!-- Disable Specific Dependency Warnings for kotlin-stdlib -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>enforce-dependency-declarations</id>
-                                <configuration>
-                                    <ignoredUsedUndeclaredDependencies combine.children="append">
-                                        <ignoredUsedUndeclaredDependency>org.jetbrains:annotations
-                                        </ignoredUsedUndeclaredDependency>
-                                    </ignoredUsedUndeclaredDependencies>
-                                    <ignoredUnusedDeclaredDependencies combine.children="append">
-                                        <ignoredUnusedDeclaredDependency>org.jetbrains.kotlin:kotlin-stdlib
-                                        </ignoredUnusedDeclaredDependency>
-                                        <ignoreUnusedDeclaredDependency>org.jetbrains.kotlin:kotlin-stdlib-jdk8
-                                        </ignoreUnusedDeclaredDependency>
-                                        <ignoreUnusedDeclaredDependency>org.apache.logging.log4j:log4j-api
-                                        </ignoreUnusedDeclaredDependency>
-                                        <ignoreUnusedDeclaredDependency>org.yaml:snakeyaml
-                                        </ignoreUnusedDeclaredDependency>
-                                    </ignoredUnusedDeclaredDependencies>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <!-- Run the kotlin compiler -->
-                    <plugin>
-                        <groupId>org.jetbrains.kotlin</groupId>
-                        <artifactId>kotlin-maven-plugin</artifactId>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <!-- release profile -->
-        <profile>
-            <id>release</id>
-            <properties>
-                <checkstyle.check.skip>true</checkstyle.check.skip>
-                <checkstyle.includeTestSourceDirectory>false</checkstyle.includeTestSourceDirectory>
-                <test.coverage.check.skip>true</test.coverage.check.skip>
-                <javadoc.skip>true</javadoc.skip>
-            </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>${maven.gpg.plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                                <configuration>
-                                    <gpgArguments>
-                                        <arg>--pinentry-mode</arg>
-                                        <arg>loopback</arg>
-                                    </gpgArguments>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>${maven.nexus-staging.plugin.version}</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <serverId>oss-sonatype</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                        </configuration>
-                    </plugin>
-                    <!-- skip some test cases during the release -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <excludes>
-                                <exclude>**/PerformanceTest.java</exclude>
-                                <argLine>@{argLine}</argLine>
-                            </excludes>
-                        </configuration>
-                    </plugin>
-                    <!-- replace the bean-utils-library javadoc jar file with the one containing all modules -->
-                    <plugin>
-                        <artifactId>maven-jar-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <configuration>
-                                    <classifier>javadoc</classifier>
-                                    <classesDirectory>${project.parent.basedir}/target/site/apidocs</classesDirectory>
-                                    <includes>**/*</includes>
-                                    <finalName>${project.build.finalName}</finalName>
-                                </configuration>
-                                <id>pack-javadoc</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+        <dependency>
+            <groupId>io.mockk</groupId>
+            <artifactId>mockk-jvm</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.mockk</groupId>
+            <artifactId>mockk-dsl-jvm</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-io-jvm</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
