@@ -9,7 +9,7 @@ on:
         type: string
 
 jobs:
-  upgrade-pom-version:
+  upgrade:
     permissions:
       contents: write
       pull-requests: write

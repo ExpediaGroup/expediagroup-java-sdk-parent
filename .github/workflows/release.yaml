@@ -19,7 +19,15 @@ on:
           - 'Yes'
 
 jobs:
-  upgrade_version:
+  print_inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print inputs
+        run: |
+          echo "Confirmation: ${{ github.event.inputs.confirmation }}"
+          echo "Upgrade version: ${{ github.event.inputs.upgrade_version }}"
+
+  upgrade:
     uses: ./.github/workflows/upgrade.yaml
     with:
       confirmation: ${{ github.event.inputs.upgrade_version }}
