@@ -6,18 +6,23 @@ on:
       production_release:
         description: 'Release to production?'
         required: true
-        type: boolean
-        default: false
+        type: choice
+        options:
+          - no
+          - yes
       upgrade_version:
         description: 'Upgrade version before release?'
         required: true
-        type: boolean
+        type: choice
+        options:
+          - yes
+          - no
 
 jobs:
   upgrade:
     uses: ./.github/workflows/upgrade.yaml
     with:
-      upgrade_version: ${{ fromJson(github.event.inputs.upgrade_version) && fromJson(github.event.inputs.production_release) }}
+      upgrade_version: ${{ github.event.inputs.upgrade_version == "yes" && github.event.inputs.production_release == "yes" }}
     secrets:
       GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
@@ -45,7 +50,7 @@ jobs:
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PRIVATE_KEY_PASSPHRASE }}
         run: |
-          if [[ "${{github.event.inputs.production_release}}" == "true" ]]; then
+          if [[ "${{github.event.inputs.production_release}}" == "yes" ]]; then
             echo "Production release"
             exit 1
             mvn deploy --settings $GITHUB_WORKSPACE/settings.xml -B -U -P release -DskipTests=true
