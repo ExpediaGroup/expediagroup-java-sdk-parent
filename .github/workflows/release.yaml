@@ -16,7 +16,7 @@ jobs:
   upgrade:
     uses: ./.github/workflows/upgrade.yaml
     with:
-      upgrade_version: if ${{ github.event.inputs.upgrade_version == 'true' }} then "true" else "false"
+      upgrade_version: ${{ github.event.inputs.upgrade_version == 'true' }}
 
   release:
     needs: [ upgrade ]
