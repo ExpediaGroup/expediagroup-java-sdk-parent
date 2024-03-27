@@ -8,15 +8,15 @@ on:
         required: true
         type: choice
         options:
-          - no
-          - yes
+          - "no"
+          - "yes"
       upgrade_version:
         description: 'Upgrade version before release?'
         required: true
         type: choice
         options:
-          - yes
-          - no
+          - "yes"
+          - "no"
 
 jobs:
   upgrade:
