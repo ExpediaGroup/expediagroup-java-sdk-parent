@@ -1,4 +1,4 @@
-name: Upgrade POM Version
+name: Upgrade
 
 on:
   workflow_call:
