@@ -33,7 +33,7 @@ jobs:
       - name: Check confirmation
         run: |
           if [ "${{ github.event.inputs.confirmation }}" = "No" ]; then
-            echo "Confirmation not checked. Failing the workflow."
+            echo "Confirmation not checked. Skipping the release."
             exit 1
           fi
 
