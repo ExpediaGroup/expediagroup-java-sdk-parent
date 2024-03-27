@@ -20,7 +20,7 @@ jobs:
       should_upgrade: ${{ steps.set.outputs.should_upgrade }}
     steps:
       - id: set
-        run: echo "should_upgrade=${{ ((github.event.inputs.upgrade_version == 'true' && github.event.inputs.production_release == 'true') && 'true') || 'false' }}" >> $GITHUB_ENV
+        run: echo "::set-output name=should_upgrade::${{ ((github.event.inputs.upgrade_version == 'true' && github.event.inputs.production_release == 'true') && 'true') || 'false' }}"
 
   upgrade:
     needs: should_upgrade
