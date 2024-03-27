@@ -4,12 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       confirmation:
-        description: 'This will release the parent POM to Maven Central. Check the box to confirm.'
+        description: 'Release?'
         required: true
         type: boolean
         default: false
       upgrade_version:
-        description: 'This will upgrade the parent POM version before release. Uncheck the box to skip.'
+        description: 'Upgrade version before release?'
         required: true
         type: boolean
         default: true
