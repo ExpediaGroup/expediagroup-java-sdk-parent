@@ -48,7 +48,6 @@ jobs:
         run: |
           git config --global user.email "oss@expediagroup.com"
           git config --global user.name "eg-oss-ci"
-          # read the version from the environment
           git commit -am "chore: upgrade POM version to ${{ env.version }}"
 
       - name: Push changes
