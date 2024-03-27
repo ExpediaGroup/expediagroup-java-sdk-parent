@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       confirmation:
-        description: 'Should the version be upgraded before release?'
+        description: 'Confirmation to upgrade the POM version. Accepted values are green or red.'
         required: true
         type: string
 
@@ -20,7 +20,7 @@ jobs:
       - name: Check confirmation
         run: |
           echo "Confirmation: ${{ github.event.inputs.confirmation }}"
-          if [ "${{ github.event.inputs.confirmation }}" = "No" ]; then
+          if [ "${{ github.event.inputs.confirmation }}" != "green" ]; then
             echo "Confirmation not checked. Skipping the upgrade."
             exit 1
           fi

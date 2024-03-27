@@ -4,19 +4,15 @@ on:
   workflow_dispatch:
     inputs:
       confirmation:
-        description: 'This will release the parent POM. Are you sure?'
+        description: 'This will release the parent POM to Maven Central. Check the box to confirm.'
         required: true
-        type: choice
-        options:
-          - 'No'
-          - 'Yes'
+        type: boolean
+        default: false
       upgrade_version:
-        description: 'Should the version be upgraded before release?'
+        description: 'This will upgrade the parent POM version before release. Uncheck the box to skip.'
         required: true
-        type: choice
-        options:
-          - 'No'
-          - 'Yes'
+        type: boolean
+        default: true
 
 jobs:
   print_inputs:
@@ -31,7 +27,7 @@ jobs:
     needs: [ print_inputs ]
     uses: ./.github/workflows/upgrade.yaml
     with:
-      confirmation: ${{ github.event.inputs.upgrade_version }}
+      confirmation: ${{ github.event.inputs.upgrade_version == 'true' && github.event.inputs.confirmation == 'true' && 'green' || 'red' }}
 
   release:
     needs: [ upgrade ]
@@ -39,7 +35,8 @@ jobs:
     steps:
       - name: Check confirmation
         run: |
-          if [ "${{ github.event.inputs.confirmation }}" = "No" ]; then
+          echo "Confirmation: ${{ github.event.inputs.confirmation }}"
+          if [ "${{ github.event.inputs.confirmation }}" != "true" ]; then
             echo "Confirmation not checked. Skipping the release."
             exit 1
           fi
