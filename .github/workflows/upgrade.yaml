@@ -24,6 +24,7 @@ jobs:
           java-version: '21'
 
       - name: Increment version
+        id: increment_version
         run: |
           version=$(mvn -q \
             -Dexec.executable=echo \
