@@ -45,11 +45,13 @@ jobs:
         run: |
           if [[ "${{github.event.inputs.production_release}}" == "true" ]]; then
             echo "here"
-#            mvn deploy --settings $GITHUB_WORKSPACE/settings.xml -B -U -P release -DskipTests=true
+            exit 1
+            mvn deploy --settings $GITHUB_WORKSPACE/settings.xml -B -U -P release -DskipTests=true
           else
             echo "there"
             VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
             SNAPSHOT_VERSION="${VERSION%-SNAPSHOT}-SNAPSHOT"
             echo "SNAPSHOT_VERSION=$SNAPSHOT_VERSION"
-#            mvn deploy --settings $GITHUB_WORKSPACE/settings.xml -B -U -P release -DskipTests=true -Drevision=$SNAPSHOT_VERSION
+            exit 1
+            mvn deploy --settings $GITHUB_WORKSPACE/settings.xml -B -U -P release -DskipTests=true -Drevision=$SNAPSHOT_VERSION
           fi
