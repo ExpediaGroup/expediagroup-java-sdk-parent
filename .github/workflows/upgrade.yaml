@@ -19,6 +19,7 @@ jobs:
     steps:
       - name: Check confirmation
         run: |
+          echo "Confirmation: ${{ github.event.inputs.confirmation }}"
           if [ "${{ github.event.inputs.confirmation }}" = "No" ]; then
             echo "Confirmation not checked. Skipping the upgrade."
             exit 1
@@ -41,13 +42,14 @@ jobs:
             exec:exec)
           ((version++))
           mvn versions:set -DnewVersion=$version
-          echo "::set-output name=version::$version"
+          echo "version=$version" >> $GITHUB_ENV
 
       - name: Commit changes
         run: |
           git config --global user.email "oss@expediagroup.com"
           git config --global user.name "eg-oss-ci"
-          git commit -am "chore: upgrade POM version to ${{ steps.increment_version.outputs.version }}"
+          # read the version from the environment
+          git commit -am "chore: upgrade POM version to ${{ env.version }}"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
