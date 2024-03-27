@@ -17,7 +17,7 @@ jobs:
   upgrade:
     uses: ./.github/workflows/upgrade.yaml
     with:
-      upgrade_version: ${{ github.event.inputs.upgrade_version == 'true' }} && ${{ github.event.inputs.production_release == 'true' }}
+      upgrade_version: ${{ (github.event.inputs.upgrade_version == 'true' && github.event.inputs.production_release == 'true') && 'true' || 'false' }}
     secrets:
       GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
