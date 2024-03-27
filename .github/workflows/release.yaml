@@ -6,12 +6,18 @@ on:
       upgrade_version:
         description: 'Should the version be upgraded before release?'
         required: true
-        type: boolean
-        default: true
+        type: choice
+        options:
+          - 'Yes'
+          - 'No'
+        default: 'Yes'
       confirmation:
         description: 'This will release the parent POM. Are you sure?'
         required: true
-        type: string
+        type: choice
+        options:
+          - 'Yes'
+          - 'No'
 
 jobs:
   upgrade_version:
@@ -24,7 +30,7 @@ jobs:
     steps:
       - name: Check confirmation
         run: |
-          if [ "${{ github.event.inputs.confirmation }}" = "false" ]; then
+          if [ "${{ github.event.inputs.confirmation }}" = "No" ]; then
             echo "Confirmation not checked. Failing the workflow."
             exit 1
           fi
