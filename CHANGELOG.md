@@ -1,6 +1,3 @@
-# Open World SDK Change Log
+# Expedia Group Java SDK Parent Change Log
 
-All notable changes to this project will be documented in this file.
-
-### [0.0.1] 2022.08.xx
-* Initial release
+Please see the [GitHub releases](https://github.com/ExpediaGroup/expediagroup-java-sdk-parent/releases) for the latest release notes.
