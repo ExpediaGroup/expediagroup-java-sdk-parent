@@ -61,7 +61,7 @@
         <ktlint-plugin.version>1.15.2</ktlint-plugin.version>
         <jacoco-plugin.version>0.8.8</jacoco-plugin.version>
         <dokka-plugin.version>1.7.20</dokka-plugin.version>
-        <maven.gpg.plugin.version>3.0.1</maven.gpg.plugin.version>
+        <maven.gpg.plugin.version>3.2.2</maven.gpg.plugin.version>
         <maven.release.plugin.version>3.4.1</maven.release.plugin.version>
         <maven.nexus-staging.plugin.version>1.6.13</maven.nexus-staging.plugin.version>
         <maven.licence.plugin.version>4.1</maven.licence.plugin.version>
