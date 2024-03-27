@@ -7,6 +7,10 @@ on:
         description: 'Upgrade?'
         required: true
         type: boolean
+    secrets:
+      GH_PERSONAL_ACCESS_TOKEN:
+        description: 'GitHub Personal Access Token'
+        required: true
 
 jobs:
   upgrade:
