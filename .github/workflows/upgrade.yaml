@@ -1,0 +1,42 @@
+name: Upgrade POM Version
+
+on:
+  workflow_dispatch:
+
+jobs:
+  upgrade-pom-version:
+    permissions:
+      contents: write
+      pull-requests: write
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: '21'
+
+      - name: Increment version
+        run: |
+          version=$(mvn -q \
+            -Dexec.executable=echo \
+            -Dexec.args='${project.version}' \
+            --non-recursive \
+            exec:exec)
+          ((version++))
+          mvn versions:set -DnewVersion=$version
+
+      - name: Commit changes
+        run: |
+          git config --global user.email "oss@expediagroup.com"
+          git config --global user.name "eg-oss-ci"
+          git commit -am "chore: upgrade POM version to $version
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
