@@ -4,21 +4,19 @@ on:
   workflow_dispatch:
     inputs:
       confirmation:
-        description: 'Release?'
+        description: 'Release???'
         required: true
         type: boolean
-        default: false
       upgrade_version:
         description: 'Upgrade version before release?'
         required: true
         type: boolean
-        default: true
 
 jobs:
   upgrade:
     uses: ./.github/workflows/upgrade.yaml
     with:
-      confirmation: ${{ github.event.inputs.upgrade_version }}
+      upgrade_version: ${{ github.event.inputs.upgrade_version }}
 
   release:
     needs: [ upgrade ]
