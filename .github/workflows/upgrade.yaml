@@ -22,7 +22,7 @@ jobs:
           echo "Confirmation: ${{ github.event.inputs.upgrade_version }}"
           if [ "${{ github.event.inputs.upgrade_version }}" != "true" ]; then
             echo "Confirmation not checked. Skipping the upgrade."
-            exit 0
+            exit 1
           fi
 
       - uses: actions/checkout@v4
