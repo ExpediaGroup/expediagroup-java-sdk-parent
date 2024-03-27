@@ -27,7 +27,7 @@ jobs:
     needs: [ print_inputs ]
     uses: ./.github/workflows/upgrade.yaml
     with:
-      confirmation: ${{ github.event.inputs.upgrade_version == 'true' && github.event.inputs.confirmation == 'true' && 'green' || 'red' }}
+      confirmation: ${{ github.event.inputs.upgrade_version }}
 
   release:
     needs: [ upgrade ]
