@@ -33,7 +33,7 @@ jobs:
         run: |
           git config --global user.email "oss@expediagroup.com"
           git config --global user.name "eg-oss-ci"
-          git commit -am "chore: upgrade POM version to $version
+          git commit -am "chore: upgrade POM version to $version"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
