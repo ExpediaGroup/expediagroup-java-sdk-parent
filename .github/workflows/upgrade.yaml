@@ -6,7 +6,7 @@ on:
       upgrade_version:
         description: 'Upgrade?'
         required: true
-        type: string
+        type: boolean
 
 jobs:
   upgrade:
