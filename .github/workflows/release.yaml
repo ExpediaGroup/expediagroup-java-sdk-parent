@@ -28,12 +28,13 @@ jobs:
           echo "Upgrade version: ${{ github.event.inputs.upgrade_version }}"
 
   upgrade:
+    needs: [ print_inputs ]
     uses: ./.github/workflows/upgrade.yaml
     with:
       confirmation: ${{ github.event.inputs.upgrade_version }}
 
   release:
-    needs: [ upgrade_version ]
+    needs: [ upgrade ]
     runs-on: ubuntu-latest
     steps:
       - name: Check confirmation
