@@ -15,14 +15,6 @@ on:
         default: true
 
 jobs:
-  print_inputs:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print inputs
-        run: |
-          echo "Confirmation: ${{ github.event.inputs.confirmation }}"
-          echo "Upgrade version: ${{ github.event.inputs.upgrade_version }}"
-
   upgrade:
     needs: [ print_inputs ]
     uses: ./.github/workflows/upgrade.yaml
