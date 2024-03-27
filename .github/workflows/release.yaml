@@ -1,17 +1,38 @@
-name: Release Parent POM
+name: Release
 
 on:
   workflow_dispatch:
     inputs:
       confirmation:
-        description: 'This will release the parent POM. Are you sure?'
+        description: 'This will release the parent POM to Maven Central. Check the box to confirm.'
         required: true
         type: boolean
+        default: false
+      upgrade_version:
+        description: 'This will upgrade the parent POM version before release. Uncheck the box to skip.'
+        required: true
+        type: boolean
+        default: true
 
 jobs:
+  upgrade:
+    needs: [ print_inputs ]
+    uses: ./.github/workflows/upgrade.yaml
+    with:
+      confirmation: ${{ github.event.inputs.upgrade_version }}
+
   release:
+    needs: [ upgrade ]
     runs-on: ubuntu-latest
     steps:
+      - name: Check confirmation
+        run: |
+          echo "Confirmation: ${{ github.event.inputs.confirmation }}"
+          if [ "${{ github.event.inputs.confirmation }}" != "true" ]; then
+            echo "Confirmation not checked. Skipping the release."
+            exit 1
+          fi
+
       - uses: actions/checkout@v4
 
       - uses: actions/setup-java@v4
@@ -25,12 +46,9 @@ jobs:
           gpg-passphrase: GPG_PASSPHRASE
           settings-path: ${{ github.workspace }}
 
-      - name: Upgrade version
-        uses: ./.github/workflows/upgrade.yaml
-
-#      - name: "Release artifacts"
-#        env:
-#          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-#          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
-#          GPG_PASSPHRASE: ${{ secrets.GPG_PRIVATE_KEY_PASSPHRASE }}
-#        run: mvn deploy --settings $GITHUB_WORKSPACE/settings.xml -B -U -P release -DskipTests=true
+      - name: "Release artifacts"
+        env:
+          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PRIVATE_KEY_PASSPHRASE }}
+        run: mvn deploy --settings $GITHUB_WORKSPACE/settings.xml -B -U -P release -DskipTests=true
