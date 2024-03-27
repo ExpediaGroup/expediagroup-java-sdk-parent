@@ -10,7 +10,6 @@ on:
         options:
           - 'No'
           - 'Yes'
-        default: 'No'
       upgrade_version:
         description: 'Should the version be upgraded before release?'
         required: true
@@ -18,7 +17,6 @@ on:
         options:
           - 'No'
           - 'Yes'
-        default: 'Yes'
 
 jobs:
   upgrade_version:
