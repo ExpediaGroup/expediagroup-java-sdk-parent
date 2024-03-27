@@ -11,7 +11,7 @@ on:
       confirmation:
         description: 'This will release the parent POM. Are you sure?'
         required: true
-        type: boolean
+        type: string
 
 jobs:
   upgrade_version:
