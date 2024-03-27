@@ -28,13 +28,13 @@ jobs:
             exec:exec)
           ((version++))
           mvn versions:set -DnewVersion=$version
-          echo "VERSION=$version" >> $GITHUB_OUTPUT
+          echo "::set-output name=version::$version"
 
       - name: Commit changes
         run: |
           git config --global user.email "oss@expediagroup.com"
           git config --global user.name "eg-oss-ci"
-          git commit -am "chore: upgrade POM version to ${{ VERSION }}"
+          git commit -am "chore: upgrade POM version to ${{ steps.increment_version.outputs.version }}"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
