@@ -19,6 +19,7 @@ jobs:
       upgrade_version: ${{ github.event.inputs.upgrade_version == 'true' }}
 
   release:
+    if: always()
     needs: [ upgrade ]
     runs-on: ubuntu-latest
     steps:
