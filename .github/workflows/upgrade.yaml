@@ -1,11 +1,7 @@
 name: Upgrade POM Version
 
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-      - mohnoor94/*
+  workflow_call
 
 jobs:
   upgrade-pom-version:
