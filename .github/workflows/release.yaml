@@ -3,15 +3,32 @@ name: Release Parent POM
 on:
   workflow_dispatch:
     inputs:
+      upgrade_version:
+        description: 'Should the version be upgraded before release?'
+        required: true
+        type: boolean
+        default: true
       confirmation:
         description: 'This will release the parent POM. Are you sure?'
         required: true
         type: boolean
 
 jobs:
+  upgrade_version:
+    uses: ./.github/workflows/upgrade.yaml
+    with:
+      confirmation: ${{ github.event.inputs.upgrade_version }}
+
   release:
     runs-on: ubuntu-latest
     steps:
+      - name: Check confirmation
+        run: |
+          if [ "${{ github.event.inputs.confirmation }}" = "false" ]; then
+            echo "Confirmation not checked. Failing the workflow."
+            exit 1
+          fi
+
       - uses: actions/checkout@v4
 
       - uses: actions/setup-java@v4
@@ -24,9 +41,6 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: GPG_PASSPHRASE
           settings-path: ${{ github.workspace }}
-
-      - name: Upgrade version
-        uses: ./.github/workflows/upgrade.yaml
 
 #      - name: "Release artifacts"
 #        env:
