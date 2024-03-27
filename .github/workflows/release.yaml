@@ -16,7 +16,6 @@ on:
 
 jobs:
   upgrade:
-    needs: [ print_inputs ]
     uses: ./.github/workflows/upgrade.yaml
     with:
       confirmation: ${{ github.event.inputs.upgrade_version }}
