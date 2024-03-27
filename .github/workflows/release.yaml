@@ -14,19 +14,10 @@ on:
         type: boolean
 
 jobs:
-  should_upgrade:
-    runs-on: ubuntu-latest
-    outputs:
-      should_upgrade: ${{ steps.set.outputs.should_upgrade }}
-    steps:
-      - id: set
-        run: echo "::set-output name=should_upgrade::${{ ((github.event.inputs.upgrade_version == 'true' && github.event.inputs.production_release == 'true') && 'true') || 'false' }}"
-
   upgrade:
-    needs: should_upgrade
     uses: ./.github/workflows/upgrade.yaml
     with:
-      upgrade_version: ${{ needs.should_upgrade.outputs.should_upgrade }}
+      upgrade_version: ${{ github.event.inputs.upgrade_version == 'true' && github.event.inputs.production_release == 'true' }}
     secrets:
       GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
