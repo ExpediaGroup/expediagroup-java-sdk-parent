@@ -3,21 +3,22 @@ name: Release Parent POM
 on:
   workflow_dispatch:
     inputs:
-      upgrade_version:
-        description: 'Should the version be upgraded before release?'
-        required: true
-        type: choice
-        options:
-          - 'Yes'
-          - 'No'
-        default: 'Yes'
       confirmation:
         description: 'This will release the parent POM. Are you sure?'
         required: true
         type: choice
         options:
-          - 'Yes'
           - 'No'
+          - 'Yes'
+        default: 'No'
+      upgrade_version:
+        description: 'Should the version be upgraded before release?'
+        required: true
+        type: choice
+        options:
+          - 'No'
+          - 'Yes'
+        default: 'No'
 
 jobs:
   upgrade_version:
@@ -26,6 +27,7 @@ jobs:
       confirmation: ${{ github.event.inputs.upgrade_version }}
 
   release:
+    needs: [ upgrade_version ]
     runs-on: ubuntu-latest
     steps:
       - name: Check confirmation
