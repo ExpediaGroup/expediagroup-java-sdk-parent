@@ -50,9 +50,11 @@ jobs:
           git config --global user.name "eg-oss-ci"
           git commit -am "chore: upgrade POM version to ${{ env.version }}"
 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
-          force: true
+          token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          commit-message: "chore: upgrade POM version to ${{ env.version }}"
+          title: "chore: upgrade POM version to ${{ env.version }}"
+          branch: "upgrade-${{ env.version }}"
+          body: "This PR upgrades the POM version to ${{ env.version }}."
