@@ -14,6 +14,8 @@ on:
 
 jobs:
   upgrade:
+    outputs:
+      branch_name: ${{ steps.create_pr.outputs.branch }}
     permissions:
       contents: write
       pull-requests: write
@@ -56,6 +58,7 @@ jobs:
           git commit -am "chore: upgrade POM version to ${{ env.version }}"
 
       - name: Create Pull Request
+        id: create_pr
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}

@@ -27,7 +27,18 @@ jobs:
     needs: [ upgrade ]
     runs-on: ubuntu-latest
     steps:
+      - name: Set branch name
+        id: set_branch
+        run: |
+          BRANCH_NAME="${{ needs.upgrade.outputs.branch_name }}"
+          if [[ -z "$BRANCH_NAME" ]]; then
+            BRANCH_NAME="${GITHUB_REF#refs/heads/}"
+          fi
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.BRANCH_NAME }}
 
       - uses: actions/setup-java@v4
         with:
