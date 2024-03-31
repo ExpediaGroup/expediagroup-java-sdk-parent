@@ -44,7 +44,7 @@ jobs:
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PRIVATE_KEY_PASSPHRASE }}
         run: |
-          if [[ "${{github.event.inputs.production_release}}" ]]; then
+          if ${{github.event.inputs.production_release}}; then
             echo "Production release"
             exit 1
             mvn deploy --settings $GITHUB_WORKSPACE/settings.xml -B -U -P release -DskipTests=true
