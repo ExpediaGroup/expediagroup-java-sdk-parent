@@ -15,7 +15,7 @@ on:
 jobs:
   upgrade:
     outputs:
-      branch_name: ${{ steps.commit_changes.outputs.branch }}
+      branch_name: ${{ steps.commit_changes.outputs.branch_name }}
     permissions:
       contents: write
       pull-requests: write
