@@ -57,8 +57,6 @@ jobs:
           echo "version: ${{ env.version }}"
           echo "branch_name=upgrade-pom-to-${{ env.version }}" >> $GITHUB_ENV
           echo "branch_name=upgrade-pom-to-${{ env.version }}" > branch_name.txt
-          echo ${{ env.branch_name }}
-          echo ${{ env.branch_name }} > branch_name.txt
           echo "-----"
           cat branch_name.txt
           echo "-----"
