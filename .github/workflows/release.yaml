@@ -36,8 +36,11 @@ jobs:
         id: read_branch
         run: |
           BRANCH_NAME=$(cat branch_name.txt)
-          echo "BRANCH_NAME=$BRANCH_NAME"
-          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+          echo "-----"
+          echo $(cat branch_name.txt)
+          echo $BRANCH_NAME
+          echo ${{ env.BRANCH_NAME }}
+          echo "-----"
 
       - name: Set branch name
         id: set_branch
