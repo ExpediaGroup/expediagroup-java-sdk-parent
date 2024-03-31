@@ -61,6 +61,7 @@ jobs:
           echo "branch_name=upgrade-pom-to-${{ env.version }}" >> $GITHUB_ENV
           echo "branch_name=upgrade-pom-to-${{ env.version }}" >> $GITHUB_OUTPUT
           echo "GITHUB_OUTPUT: $GITHUB_OUTPUT"
+          cat $GITHUB_OUTPUT
 
       - name: Create Pull Request
         id: create_pr
