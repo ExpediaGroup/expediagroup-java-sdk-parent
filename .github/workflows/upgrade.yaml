@@ -62,5 +62,5 @@ jobs:
           token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           commit-message: "chore: upgrade POM version to ${{ env.version }}"
           title: "chore: upgrade POM version to ${{ env.version }}"
-          branch: "upgrade-${{ env.version }}"
+          branch: "upgrade-pom-to-${{ env.version }}"
           body: "This PR upgrades the POM version to ${{ env.version }}."
