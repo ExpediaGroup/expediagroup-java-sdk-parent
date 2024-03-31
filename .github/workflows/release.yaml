@@ -27,6 +27,11 @@ jobs:
     needs: [ upgrade ]
     runs-on: ubuntu-latest
     steps:
+      - name: Debug
+        run: |
+          echo "Upgrade branch name: ${{ needs.upgrade.outputs.branch_name }}"
+          echo "GITHUB_REF: $GITHUB_REF"
+          exit 1
       - name: Set branch name
         id: set_branch
         run: |
