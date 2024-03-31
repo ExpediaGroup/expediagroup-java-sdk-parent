@@ -56,3 +56,5 @@ jobs:
             echo "Releasing as snapshot"
             mvn deploy --settings $GITHUB_WORKSPACE/settings.xml -B -U -P release -DskipTests=true -Drevision=$SNAPSHOT_VERSION
           fi
+          echo "version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
+          echo "version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
