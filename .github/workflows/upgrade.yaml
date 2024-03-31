@@ -23,7 +23,6 @@ jobs:
     steps:
       - name: Check confirmation
         run: |
-          echo "Confirmation: ${{ github.event.inputs.upgrade_version }}"
           if ! ${{ github.event.inputs.upgrade_version }}; then
             echo "Confirmation not checked. Skipping the upgrade."
             exit 1

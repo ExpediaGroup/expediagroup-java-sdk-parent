@@ -47,14 +47,12 @@ jobs:
           GPG_PASSPHRASE: ${{ secrets.GPG_PRIVATE_KEY_PASSPHRASE }}
         run: |
           if ${{github.event.inputs.production_release}}; then
-            echo "Production release"
+            echo "Releasing to production"
             exit 1
             mvn deploy --settings $GITHUB_WORKSPACE/settings.xml -B -U -P release -DskipTests=true
           else
             VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
             SNAPSHOT_VERSION="${VERSION%-SNAPSHOT}-SNAPSHOT"
-            echo "Snapshot release"
-            echo "VERSION=$VERSION"
-            exit 1
+            echo "Releasing as snapshot"
             mvn deploy --settings $GITHUB_WORKSPACE/settings.xml -B -U -P release -DskipTests=true -Drevision=$SNAPSHOT_VERSION
           fi
