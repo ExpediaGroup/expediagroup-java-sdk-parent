@@ -27,11 +27,17 @@ jobs:
     needs: [ upgrade ]
     runs-on: ubuntu-latest
     steps:
-      - name: Debug
+      - name: Download branch name
+        uses: actions/download-artifact@v4
+        with:
+          name: branch-name
+
+      - name: Read branch name from file
+        id: read_branch
         run: |
-          echo "Upgrade branch name: ${{ needs.upgrade.outputs.branch_name }}"
-          echo "GITHUB_REF: $GITHUB_REF"
-          exit 1
+          BRANCH_NAME=$(cat branch_name.txt)
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+
       - name: Set branch name
         id: set_branch
         run: |
@@ -40,6 +46,8 @@ jobs:
             BRANCH_NAME="${GITHUB_REF#refs/heads/}"
           fi
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+          echo "BRANCH_NAME=$BRANCH_NAME"
+          exit 1
 
       - uses: actions/checkout@v4
         with:

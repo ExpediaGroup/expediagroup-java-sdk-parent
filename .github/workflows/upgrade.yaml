@@ -14,8 +14,6 @@ on:
 
 jobs:
   upgrade:
-    outputs:
-      branch_name: ${{ steps.commit_changes.outputs.branch_name }}
     permissions:
       contents: write
       pull-requests: write
@@ -52,19 +50,21 @@ jobs:
           echo "version=$version" >> $GITHUB_ENV
 
       - name: Commit changes
-        id: commit_changes
         run: |
           git config --global user.email "oss@expediagroup.com"
           git config --global user.name "eg-oss-ci"
           git commit -am "chore: upgrade POM version to ${{ env.version }}"
           echo "version: ${{ env.version }}"
           echo "branch_name=upgrade-pom-to-${{ env.version }}" >> $GITHUB_ENV
-          echo "branch_name=upgrade-pom-to-${{ env.version }}" >> $GITHUB_OUTPUT
-          echo "GITHUB_OUTPUT: $GITHUB_OUTPUT"
-          cat $GITHUB_OUTPUT
+          echo "${{ env.branch_name }}" > branch_name.txt
+
+      - name: Upload branch name
+        uses: actions/upload-artifact@v4
+        with:
+          name: branch-name
+          path: branch_name.txt
 
       - name: Create Pull Request
-        id: create_pr
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
@@ -72,9 +72,3 @@ jobs:
           title: "chore: upgrade POM version to ${{ env.version }}"
           branch: ${{ env.branch_name }}
           body: "This PR upgrades the POM version to ${{ env.version }}."
-
-      - name: Debug
-        run: |
-          echo "Branch name: ${{ steps.commit_changes.outputs.branch }}"
-          echo "GITHUB_REF: $GITHUB_REF"
-          echo "Branch name from env: ${{ env.branch_name }}"
