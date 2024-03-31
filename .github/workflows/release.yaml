@@ -48,12 +48,13 @@ jobs:
         run: |
           if ${{github.event.inputs.production_release}}; then
             echo "Releasing to production"
-            mvn deploy --settings $GITHUB_WORKSPACE/settings.xml -B -U -P release -DskipTests=true
+            mvn deploy --settings $GITHUB_WORKSPACE/settings.xml -B -U -P release
           else
             VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
             SNAPSHOT_VERSION="${VERSION%-SNAPSHOT}-SNAPSHOT"
             echo "Releasing as snapshot"
-            mvn deploy --settings $GITHUB_WORKSPACE/settings.xml -B -U -P release -DskipTests=true -Drevision=$SNAPSHOT_VERSION
+            mvn versions:set -DnewVersion=$SNAPSHOT_VERSION
+            mvn deploy --settings $GITHUB_WORKSPACE/settings.xml -B -U -P release
           fi
           echo "version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
           echo "version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
