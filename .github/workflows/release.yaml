@@ -4,13 +4,15 @@ on:
   workflow_dispatch:
     inputs:
       production_release:
-        description: 'Release to production?'
+        description: '(!!!) Release to production'
         required: true
         type: boolean
+        default: false
       upgrade_version:
-        description: 'Upgrade version before release?'
+        description: 'Upgrade version before release'
         required: true
         type: boolean
+        default: true
 
 jobs:
   upgrade:
