@@ -58,6 +58,7 @@ jobs:
           git config --global user.name "eg-oss-ci"
           git commit -am "chore: upgrade POM version to ${{ env.version }}"
           echo "branch_name=upgrade-pom-to-${{ env.version }}" >> $GITHUB_ENV
+          core.setOutput('branch_name', "upgrade-pom-to-${{ env.version }}")
 
 
       - name: Create Pull Request
