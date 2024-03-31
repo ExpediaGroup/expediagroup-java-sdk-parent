@@ -24,9 +24,11 @@ jobs:
       - name: Check confirmation
         run: |
           echo "Confirmation: ${{ github.event.inputs.upgrade_version }}"
-          if [ "${{ github.event.inputs.upgrade_version }}" != "true" ]; then
+          if ! ${{ github.event.inputs.upgrade_version }}; then
             echo "Confirmation not checked. Skipping the upgrade."
             exit 1
+          else
+            echo "Confirmation checked. Proceeding with the upgrade."
           fi
 
       - uses: actions/checkout@v4
