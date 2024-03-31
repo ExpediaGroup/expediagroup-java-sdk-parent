@@ -54,12 +54,8 @@ jobs:
           git config --global user.email "oss@expediagroup.com"
           git config --global user.name "eg-oss-ci"
           git commit -am "chore: upgrade POM version to ${{ env.version }}"
-          echo "version: ${{ env.version }}"
           echo "branch_name=upgrade-pom-to-${{ env.version }}" >> $GITHUB_ENV
           echo "upgrade-pom-to-${{ env.version }}" > branch_name.txt
-          echo "-----"
-          cat branch_name.txt
-          echo "-----"
 
       - name: Upload branch name
         uses: actions/upload-artifact@v4

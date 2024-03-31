@@ -36,13 +36,11 @@ jobs:
         id: set_branch
         run: |
           BRANCH_NAME=$(cat branch_name.txt)
-          echo $BRANCH_NAME
           if [[ -z "$BRANCH_NAME" ]]; then
             BRANCH_NAME="${GITHUB_REF#refs/heads/}"
           fi
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
           echo "BRANCH_NAME=$BRANCH_NAME"
-          exit 1
 
       - uses: actions/checkout@v4
         with:
