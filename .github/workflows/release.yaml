@@ -48,7 +48,6 @@ jobs:
         run: |
           if ${{github.event.inputs.production_release}}; then
             echo "Releasing to production"
-            exit 1
             mvn deploy --settings $GITHUB_WORKSPACE/settings.xml -B -U -P release -DskipTests=true
           else
             VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
