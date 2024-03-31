@@ -53,8 +53,8 @@ jobs:
         run: |
           git config --global user.email "oss@expediagroup.com"
           git config --global user.name "eg-oss-ci"
-          git commit -am "chore: upgrade POM version to ${{ env.version }}"
           git add pom.xml # add this file only to the commit
+          git commit -am "chore: upgrade POM version to ${{ env.version }}"
           echo "branch_name=upgrade-pom-to-${{ env.version }}" >> $GITHUB_ENV
           echo "upgrade-pom-to-${{ env.version }}" > branch_name.txt
 
