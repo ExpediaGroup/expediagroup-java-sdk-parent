@@ -66,3 +66,7 @@ jobs:
           title: "chore: upgrade POM version to ${{ env.version }}"
           branch: "upgrade-pom-to-${{ env.version }}"
           body: "This PR upgrades the POM version to ${{ env.version }}."
+
+      - name: Debug
+        run: |
+          echo "Branch name: ${{ steps.create_pr.outputs.branch }}"
