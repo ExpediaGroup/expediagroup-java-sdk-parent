@@ -32,20 +32,11 @@ jobs:
         with:
           name: branch-name
 
-      - name: Read branch name from file
-        id: read_branch
-        run: |
-          BRANCH_NAME=$(cat branch_name.txt)
-          echo "-----"
-          echo $(cat branch_name.txt)
-          echo $BRANCH_NAME
-          echo ${{ env.BRANCH_NAME }}
-          echo "-----"
-
       - name: Set branch name
         id: set_branch
         run: |
-          BRANCH_NAME="${{ needs.upgrade.outputs.branch_name }}"
+          BRANCH_NAME=$(cat branch_name.txt)
+          echo $BRANCH_NAME
           if [[ -z "$BRANCH_NAME" ]]; then
             BRANCH_NAME="${GITHUB_REF#refs/heads/}"
           fi
