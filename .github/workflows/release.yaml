@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       production_release:
-        description: '⚠️ Release to production'
+        description: '(!!!) Release to production'
         required: true
         type: boolean
         default: false
