@@ -7,6 +7,10 @@ on:
         description: 'Upgrade?'
         required: true
         type: boolean
+    secrets:
+      GH_PERSONAL_ACCESS_TOKEN:
+        description: 'GitHub Personal Access Token'
+        required: true
 
 jobs:
   upgrade:
@@ -19,10 +23,11 @@ jobs:
     steps:
       - name: Check confirmation
         run: |
-          echo "Confirmation: ${{ github.event.inputs.upgrade_version }}"
-          if [ "${{ github.event.inputs.upgrade_version }}" != "true" ]; then
+          if ! ${{ github.event.inputs.upgrade_version }}; then
             echo "Confirmation not checked. Skipping the upgrade."
             exit 1
+          else
+            echo "Confirmation checked. Proceeding with the upgrade."
           fi
 
       - uses: actions/checkout@v4
@@ -49,9 +54,20 @@ jobs:
           git config --global user.email "oss@expediagroup.com"
           git config --global user.name "eg-oss-ci"
           git commit -am "chore: upgrade POM version to ${{ env.version }}"
+          echo "branch_name=upgrade-pom-to-${{ env.version }}" >> $GITHUB_ENV
+          echo "upgrade-pom-to-${{ env.version }}" > branch_name.txt
 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
+      - name: Upload branch name
+        uses: actions/upload-artifact@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          name: branch-name
+          path: branch_name.txt
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          commit-message: "chore: upgrade POM version to ${{ env.version }}"
+          title: "chore: upgrade POM version to ${{ env.version }}"
+          branch: ${{ env.branch_name }}
+          body: "This PR upgrades the POM version to ${{ env.version }}."
