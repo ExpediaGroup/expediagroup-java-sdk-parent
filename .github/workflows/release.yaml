@@ -36,8 +36,9 @@ jobs:
       - name: Set branch name
         id: set_branch
         run: |
-          BRANCH_NAME=$(cat branch_name.txt)
-          if [[ -z "$BRANCH_NAME" ]]; then
+          if [ -f branch_name.txt ]; then
+            BRANCH_NAME=$(cat branch_name.txt)
+          else
             BRANCH_NAME="${GITHUB_REF#refs/heads/}"
           fi
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
@@ -74,5 +75,5 @@ jobs:
             mvn versions:set -DnewVersion=$SNAPSHOT_VERSION
             mvn deploy --settings $GITHUB_WORKSPACE/settings.xml -B -U -P release
           fi
-          echo "version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
+          echo "version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout) released"
           echo "version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
