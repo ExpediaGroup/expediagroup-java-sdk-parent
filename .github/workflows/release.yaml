@@ -31,6 +31,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: branch-name
+        continue-on-error: true
 
       - name: Set branch name
         id: set_branch
